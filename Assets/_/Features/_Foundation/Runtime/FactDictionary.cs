@@ -33,18 +33,24 @@ namespace Foundation.Runtime
 
         public void SetFact<T>(string key, T value, FMono.FactPersistence persistence)
         {
-            if (_facts.TryGetValue(key, out var existingFact))
+            if (FactExists<T>(key, out var existingFact))
             {
                 if (existingFact is Fact<T> typedFact)
                 {
                     typedFact.Value = value;
                     typedFact.IsPersistent = persistence == FMono.FactPersistence.Persistent;
                 }
-                else
-                {
-                    throw new InvalidCastException("Fact exists but is a wrong type");
-                }
+                else throw new InvalidCastException("Fact exists but is a wrong type");
             }
+            // if (_facts.TryGetValue(key, out var existingFact))
+            // {
+            //     if (existingFact is Fact<T> typedFact)
+            //     {
+            //         typedFact.Value = value;
+            //         typedFact.IsPersistent = persistence == FMono.FactPersistence.Persistent;
+            //     }
+            //     else throw new InvalidCastException("Fact exists but is a wrong type");
+            // }
             else
             {
                 bool isPersistent = persistence == FMono.FactPersistence.Persistent;
@@ -54,15 +60,9 @@ namespace Foundation.Runtime
 
         public T GetFact<T>(string key)
         {
-            if (!_facts.TryGetValue(key, out var fact))
-            {
-                throw new KeyNotFoundException($"Fact {key} does not exist");
-            }
+            if (!_facts.TryGetValue(key, out var fact)) throw new KeyNotFoundException($"Fact {key} does not exist");
 
-            if (_facts[key] is not Fact<T> typedFact)
-            {
-                throw new InvalidCastException($"Fact {key} is not of type {typeof(T)}");
-            }
+            if (_facts[key] is not Fact<T> typedFact) throw new InvalidCastException($"Fact {key} is not of type {typeof(T)}");
             
             return typedFact.Value;
         }

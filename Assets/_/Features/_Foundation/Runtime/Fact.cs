@@ -22,14 +22,8 @@ namespace Foundation.Runtime
 
         public void SetObjectValue(object value)
         {
-            if (value is T cast)
-            {
-                Value = cast;
-            }
-            else
-            {
-                throw new InvalidCastException("Cannot assign a value to a fact");
-            }
+            if (value is T cast) Value = cast;
+            else throw new InvalidCastException("Cannot assign a value to a fact");
         }
 
         public bool IsPersistent { get; set; }
