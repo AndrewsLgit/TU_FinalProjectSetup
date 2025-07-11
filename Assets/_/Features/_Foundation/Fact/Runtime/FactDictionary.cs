@@ -1,8 +1,9 @@
 using System;
 using System.Collections.Generic;
-using Foundation.Runtime.Interfaces;
+using System.Linq;
+using Fact.Runtime.Interfaces;
 
-namespace Foundation.Runtime
+namespace Fact.Runtime
 {
     public class FactDictionary
     {
@@ -10,11 +11,17 @@ namespace Foundation.Runtime
 
         public Dictionary<string, IFact> AllFacts => _facts;
         
+        public enum FactPersistence
+        {
+            Normal,
+            Persistent,
+        }
+        
         #endregion
         
         #region Private Variables
         
-        private Dictionary<string, IFact> _facts => new Dictionary<string, IFact>();
+        private Dictionary<string, IFact> _facts = new Dictionary<string, IFact>();
         
         #endregion
         
@@ -31,18 +38,10 @@ namespace Foundation.Runtime
             return false;
         }
 
-        public void SetFact<T>(string key, T value, FMono.FactPersistence persistence)
+        public void SetFact<T>(string key, T value, FactPersistence persistence)
         {
-            if (FactExists<T>(key, out var existingFact))
-            {
-                if (existingFact is Fact<T> typedFact)
-                {
-                    typedFact.Value = value;
-                    typedFact.IsPersistent = persistence == FMono.FactPersistence.Persistent;
-                }
-                else throw new InvalidCastException("Fact exists but is a wrong type");
-            }
-            // if (_facts.TryGetValue(key, out var existingFact))
+            // DOES NOT WORK
+            // if (FactExists<T>(key, out var existingFact))
             // {
             //     if (existingFact is Fact<T> typedFact)
             //     {
@@ -51,10 +50,23 @@ namespace Foundation.Runtime
             //     }
             //     else throw new InvalidCastException("Fact exists but is a wrong type");
             // }
+            // DOES NOT WORK
+            
+            if (_facts.TryGetValue(key, out var existingFact))
+            {
+                if (existingFact is Fact<T> typedFact)
+                {
+                    typedFact.Value = value;
+                    typedFact.IsPersistent = persistence == FactPersistence.Persistent;
+                }
+                else throw new InvalidCastException("Fact exists but is a wrong type");
+            }
             else
             {
-                bool isPersistent = persistence == FMono.FactPersistence.Persistent;
+                bool isPersistent = persistence == FactPersistence.Persistent;
                 _facts[key] = new Fact<T>(value, isPersistent);
+                // _facts.Add(key, new Fact<T>(value, isPersistent));
+                //Debug.Log($"Added fact: {_facts[key]}");
             }
         }
 
@@ -65,6 +77,14 @@ namespace Foundation.Runtime
             if (_facts[key] is not Fact<T> typedFact) throw new InvalidCastException($"Fact {key} is not of type {typeof(T)}");
             
             return typedFact.Value;
+        }
+
+        public Dictionary<string, IFact> GetPersistentFacts()
+        {
+            var persistentFacts = _facts.Where(fact => fact.Value.IsPersistent)
+                .ToDictionary(fact => fact.Key, fact => fact.Value);
+
+            return persistentFacts;
         }
 
         public void RemoveFact<T>(string key)

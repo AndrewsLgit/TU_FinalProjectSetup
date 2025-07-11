@@ -1,7 +1,7 @@
 using System;
-using Foundation.Runtime.Interfaces;
+using Fact.Runtime.Interfaces;
 
-namespace Foundation.Runtime
+namespace Fact.Runtime
 {
     public class Fact<T> : IFact
     {

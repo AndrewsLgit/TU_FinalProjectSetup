@@ -1,6 +1,6 @@
 using System;
 
-namespace Foundation.Runtime.Interfaces
+namespace Fact.Runtime.Interfaces
 {
     public interface IFact
     {

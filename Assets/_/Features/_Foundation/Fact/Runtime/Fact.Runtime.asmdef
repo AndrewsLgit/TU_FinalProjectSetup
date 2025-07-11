@@ -1,10 +1,7 @@
 {
-    "name": "Foundation.Runtime",
-    "rootNamespace": "Foundation.Runtime",
-    "references": [
-        "GUID:e59444c77c5cc4ceaae734e0b2a21829",
-        "GUID:f19c855bb07df433f859455c7e8c5d7c"
-    ],
+    "name": "Fact.Runtime",
+    "rootNamespace": "Fact.Runtime",
+    "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
     "allowUnsafeCode": false,
