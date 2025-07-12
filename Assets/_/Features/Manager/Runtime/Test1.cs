@@ -8,8 +8,9 @@ namespace Manager.Runtime
         // Start is called once before the first execution of Update after the MonoBehaviour is created
         void Start()
         {
+            Info("Starting Test1");
             SetFact("CounterTest/Int", 1, _persistence);
-            InfoProgress($"All Facts: {GameFacts.AllFacts.Keys}");
+            InfoDone($"All Facts: {GameFacts.AllFacts.Keys}");
             SaveGame();
         }
 
@@ -20,11 +21,9 @@ namespace Manager.Runtime
             counter++;
             SetFact("CounterTest/Int", counter, _persistence);
 
-            if (counter == 20)
-            {
-                InfoProgress($"Reached {counter}");
-                LoadGame();
-            }
+            if (counter != 20) return;
+            InfoDone($"Reached {counter}");
+            LoadGame();
         }
     }
 }

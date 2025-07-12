@@ -1,4 +1,5 @@
 using Fact.Runtime;
+using SaveSystem.Runtime;
 using UnityEngine;
 
 namespace Foundation.Runtime
@@ -9,6 +10,8 @@ namespace Foundation.Runtime
 
         #region Public
    
+        
+        
         #endregion
 
         #region Private and Protected
@@ -58,12 +61,16 @@ namespace Foundation.Runtime
 
         protected void SaveGame()
         {
-            GameSystem.SaveData();
+            InfoInProgress("Saving Game");
+            GameSystem.SaveGame();
+            InfoDone("Game Saved");
         }
    
         protected void LoadGame()
         {
-            GameSystem.LoadData();
+            InfoInProgress("Loading Game");
+            GameSystem.LoadGame();
+            InfoDone("Game Loaded");
         }
         #endregion
    
@@ -72,31 +79,31 @@ namespace Foundation.Runtime
         protected void Info(string message)
         {
             if (!m_isVerbose) return;
-            Debug.Log($"<color=lightblue>--- FROM: {this} | INFO: {message} ---</color>");
+            Debug.Log($"<color=cyan> FROM: {this} | INFO: {message} </color>");
         }
    
-        protected void InfoProgress(string message)
+        protected void InfoInProgress(string message)
         {
             if (!m_isVerbose) return;
-            Debug.Log($"<color=orange>--- FROM: {this} | INFO: {message} ---</color>");
+            Debug.Log($"<color=orange> FROM: {this} | IN_PROGRESS: {message} </color>");
         }
         
         protected void InfoDone(string message)
         {
             if (!m_isVerbose) return;
-            Debug.Log($"<color=green>--- FROM: {this} | INFO: {message} ---</color>");
+            Debug.Log($"<color=green> FROM: {this} | DONE: {message} </color>");
         }
 
         protected void Warning(string message)
         {
             if (!m_isVerbose) return;
-            Debug.LogWarning($"<color=yellow>--- FROM: {this} | WARNING: {message} ---</color>");
+            Debug.LogWarning($"<color=yellow> FROM: {this} | WARNING: {message} </color>");
         }
 
         protected void Error(string message)
         {
             if (!m_isVerbose) return;
-            Debug.LogError($"<color=red>--- FROM: {this} | ERROR: {message} ---</color>");
+            Debug.LogError($"<color=red> FROM: {this} | ERROR: {message} </color>");
         }
    
         #endregion

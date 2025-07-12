@@ -47,27 +47,27 @@ namespace Foundation.Runtime
             {
                 if (_jsonSaveSystem != null) return _jsonSaveSystem;
                 _jsonSaveSystem = new JsonSaveSystem();
+                _jsonSaveSystem.SetPath(_filePath);
                 return _jsonSaveSystem;
             }
         }
         
-        // public static GameSystem Instance => _instance;
-
-        // public static GameSystem Instance
-        // {
-        //     get
-        //     {
-        //         if (_instance != null) return _instance;
-        //         _instance = new GameSystem();
-        //         return _instance;
-        //     }
-        // }
-
         #endregion
 
         #region Main Methods
 
-        
+        public static Dictionary<string, IFact> SaveGame()
+        {
+            var persistentFacts = m_gameFacts.GetPersistentFacts();
+            m_jsonSaveSystem.Save(persistentFacts);
+            //todo: refresh IFact dictionary, when saving/loading 
+            return persistentFacts;
+        }
+
+        public static Dictionary<string, IFact> LoadGame()
+        {
+            return m_jsonSaveSystem.Load<Dictionary<string, IFact>>();
+        }
 
         
 
