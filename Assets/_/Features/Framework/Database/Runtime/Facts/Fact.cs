@@ -1,15 +1,17 @@
 using System;
-using Fact.Runtime.Interfaces;
+using Database.Runtime.Interfaces;
 
-namespace Fact.Runtime
+namespace Database.Runtime
 {
+    //[Serializable] class can't be inherited if Serializable
+    // no inheritance needed for now but I don't want to have to rewrite a part of the save system in the future
     public class Fact<T> : IFact
     {
         public T Value;
-        private object _getObjectValue;
-
         public Type ValueType => typeof(T);
-
+        public bool IsPersistent { get; set; }
+        
+        private object _getObjectValue;
         object IFact.GetObjectValue => _getObjectValue;
 
         public Fact(T value, bool isPersistent = false)
@@ -17,7 +19,7 @@ namespace Fact.Runtime
             Value = value;
             IsPersistent = isPersistent;
         }
-        
+
         public object GetObjectValue() => Value;
 
         public void SetObjectValue(object value)
@@ -26,6 +28,5 @@ namespace Fact.Runtime
             else throw new InvalidCastException("Cannot assign a value to a fact");
         }
 
-        public bool IsPersistent { get; set; }
     }
 }

@@ -9,21 +9,22 @@ namespace Manager.Runtime
         void Start()
         {
             Info("Starting Test1");
-            SetFact("CounterTest/Int", 1, _persistence);
-            InfoDone($"All Facts: {GameFacts.AllFacts.Keys}");
-            SaveGame();
+            SetFact("CounterTest/Int", 1, true);
+            //InfoDone($"All Facts: {GameFacts.AllFacts.Keys}");
+            Save();
         }
 
         // Update is called once per frame
         void Update()
         {
+            Load();
             var counter = GetFact<int>("CounterTest/Int");
-            counter++;
-            SetFact("CounterTest/Int", counter, _persistence);
+            // counter++;
+            SetFact("CounterTest/Int", ++counter, true);
 
             if (counter != 20) return;
             InfoDone($"Reached {counter}");
-            LoadGame();
+            // Load();
         }
     }
 }

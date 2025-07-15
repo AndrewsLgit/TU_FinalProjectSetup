@@ -1,11 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using Fact.Runtime;
-using Fact.Runtime.Interfaces;
-using SaveSystem.Runtime;
-using SaveSystem.Runtime.Interfaces;
-using Unity.Plastic.Newtonsoft.Json;
+using Database.Runtime;
 using UnityEngine;
 
 namespace Foundation.Runtime
@@ -23,6 +16,7 @@ namespace Foundation.Runtime
         // all these systems are able to be instantiated in order to have different implementations
         // BUT they should be statically accessible in order to be called from anywhere with our FMono
         // TODO: Use this to implement the localisation
+        // For localisation, use an Event to update language without having 
         
         private static readonly string _filePath = $"{Application.persistentDataPath}/{_savePath}";
 
@@ -54,24 +48,5 @@ namespace Foundation.Runtime
         
         #endregion
 
-        #region Main Methods
-
-        public static Dictionary<string, IFact> SaveGame()
-        {
-            var persistentFacts = m_gameFacts.GetPersistentFacts();
-            m_jsonSaveSystem.Save(persistentFacts);
-            //todo: refresh IFact dictionary, when saving/loading 
-            return persistentFacts;
-        }
-
-        public static Dictionary<string, IFact> LoadGame()
-        {
-            return m_jsonSaveSystem.Load<Dictionary<string, IFact>>();
-        }
-
-        
-
-        #endregion
-        
     }
 }

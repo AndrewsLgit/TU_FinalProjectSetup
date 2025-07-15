@@ -1,4 +1,4 @@
-namespace SaveSystem.Runtime.Interfaces
+namespace Database.Runtime.Interfaces
 {
     public interface ISaveSystem
     {

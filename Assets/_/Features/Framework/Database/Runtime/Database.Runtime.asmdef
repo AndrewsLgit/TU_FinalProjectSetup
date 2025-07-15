@@ -1,6 +1,6 @@
 {
-    "name": "Fact.Runtime",
-    "rootNamespace": "Fact.Runtime",
+    "name": "Database.Runtime",
+    "rootNamespace": "Database.Runtime",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],

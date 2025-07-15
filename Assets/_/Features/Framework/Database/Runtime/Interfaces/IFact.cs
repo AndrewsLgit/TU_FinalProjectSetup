@@ -1,6 +1,6 @@
 using System;
 
-namespace Fact.Runtime.Interfaces
+namespace Database.Runtime.Interfaces
 {
     public interface IFact
     {

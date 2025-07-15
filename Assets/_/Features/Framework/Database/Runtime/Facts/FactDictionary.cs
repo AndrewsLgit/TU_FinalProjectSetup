@@ -1,9 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Fact.Runtime.Interfaces;
+using Database.Runtime.Interfaces;
 
-namespace Fact.Runtime
+namespace Database.Runtime
 {
     public class FactDictionary
     {
@@ -45,7 +45,7 @@ namespace Fact.Runtime
             // {
             //     if (existingFact is Fact<T> typedFact)
             //     {
-            //         typedFact.Value = value;
+            //         typedFact.JsonValue = value;
             //         typedFact.IsPersistent = persistence == FMono.FactPersistence.Persistent;
             //     }
             //     else throw new InvalidCastException("Fact exists but is a wrong type");
@@ -86,6 +86,7 @@ namespace Fact.Runtime
 
             return persistentFacts;
         }
+
 
         public void RemoveFact<T>(string key)
         {
