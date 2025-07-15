@@ -21,9 +21,10 @@ namespace Manager.Runtime
             var counter = GetFact<int>("CounterTest/Int");
             // counter++;
             SetFact("CounterTest/Int", ++counter, true);
+            Save();
 
-            if (counter != 20) return;
-            InfoDone($"Reached {counter}");
+            if (counter <= 20) return;
+            Info($"Reached {counter}");
             // Load();
         }
     }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Database.Runtime;
 using Unity.Plastic.Newtonsoft.Json;
 using UnityEditor;
@@ -22,14 +23,14 @@ namespace Database.Editor
 
             if (GUILayout.Button("Deserialize"))
             {
-                _output = JsonConvert.DeserializeObject<SaveFile>(_jsonContent);
+                _output = JsonConvert.DeserializeObject<Dictionary<string, SerializableFact>>(_jsonContent);
             }
             if(_output != null) GUILayout.Label(_output.ToString());
-            if(_output != null) GUILayout.Label(_output.Facts.Count.ToString());
+            if(_output != null) GUILayout.Label(_output.Count.ToString());
         }
 
         private static EditorWindow _window;
         private static string _jsonContent = "{\n  \"CounterTest/Int\": {\n    \"JsonValue\": 1,\n    \"ValueType\": \"System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089\",\n    \"IsPersistent\": true\n  }\n}\n";
-        private static SaveFile _output;
+        private static Dictionary<string, SerializableFact> _output;
     }
 }

@@ -10,13 +10,8 @@ namespace Foundation.Runtime
     {
         #region Variables
 
-        #region Public
-   
-        
-        
-        #endregion
-
         #region Private and Protected
+        
         [SerializeField, Header("Debug")]
         protected bool m_isVerbose;
         
@@ -80,50 +75,8 @@ namespace Foundation.Runtime
                 InfoDone($"Fact: {fact.Key} = {fact.Value.GetObjectValue}");
             }
             //InfoDone($"Game loaded: {loaded}");
-            
         }
 
-        // protected void SaveGame()
-        // {
-        //     InfoInProgress("Saving Game");
-        //     var savedFacts = GameSystem.SaveGame();
-        //     InfoDone("Game Saved: {" + string.Join(", ", savedFacts.Keys) + string.Join(", ", savedFacts.Values) + "}");
-        // }
-        //todo: remove these methods, they should be handled on the SaveSystem class
-        // protected Dictionary<string, IFact> SaveGame()
-        // {
-        //     InfoInProgress("Saving Game");
-        //     var persistentFacts = GameFacts.GetPersistentFacts();
-        //     var savedFacts = SaveSystem.Save<Dictionary<string, IFact>>(persistentFacts);
-        //     InfoDone("Game Saved: {" + string.Join(", ", savedFacts.Keys) + string.Join(", ", savedFacts.Values) + "}");
-        //     //todo: refresh IFact dictionary, when saving/loading 
-        //     return persistentFacts;
-        // }
-        // protected void LoadGame()
-        // {
-        //     InfoInProgress("Loading Game");
-        //     var loadedFacts = GameSystem.LoadGame();
-        //     InfoDone("Game Loaded: {" + string.Join(", ", loadedFacts.Keys) + string.Join(", ", loadedFacts.Values) + "}");
-        // }
-        
-        // protected void LoadGame()
-        // {
-        //     InfoInProgress("Loading Game");
-        //     // Activator.CreateInstance
-        //     // typeof.makeNewType
-        //     var loadedFacts = SaveSystem.Load();
-        //     if (loadedFacts == null) return null;
-        //
-        //     foreach (var fact in loadedFacts)
-        //     {
-        //         InfoInProgress($"Loading fact: {fact.Key}: {fact.JsonValue}");
-        //         GameFacts.SetFact(fact.Key, fact.JsonValue, FactDictionary.FactPersistence.Persistent);;
-        //     }
-        //     InfoDone("Game Loaded: {" + string.Join(", ", loadedFacts.Keys) + string.Join(", ", loadedFacts.Values) + "}");
-        //
-        //     return loadedFacts;
-        // }
-        
         #endregion
    
         #region Debug
@@ -160,7 +113,5 @@ namespace Foundation.Runtime
    
         #endregion
    
-  
     }
-  
 }

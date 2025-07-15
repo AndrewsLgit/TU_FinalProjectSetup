@@ -10,17 +10,14 @@ namespace Database.Runtime
         public T Value;
         public Type ValueType => typeof(T);
         public bool IsPersistent { get; set; }
-        
-        private object _getObjectValue;
-        object IFact.GetObjectValue => _getObjectValue;
+
+        object IFact.GetObjectValue => Value;
 
         public Fact(T value, bool isPersistent = false)
         {
             Value = value;
             IsPersistent = isPersistent;
         }
-
-        public object GetObjectValue() => Value;
 
         public void SetObjectValue(object value)
         {

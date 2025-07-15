@@ -22,55 +22,7 @@ namespace Database.Runtime
         
         #region Main Methods
 
-        // DEPRECATED
-        // public T Save<T>(T data)
-        // {
-        //     try
-        //     {
-        //         string jsonString = JsonConvert.SerializeObject(data, Formatting.Indented);
-        //         File.WriteAllText(Path, jsonString);
-        //         // Info($"Game saved! \n Path: {_filePath}");
-        //         return data;
-        //     }
-        //     catch (Exception ex)
-        //     {
-        //         // Error($"Error saving game: {ex.Message}");
-        //         // throw new Exception(ex.Message);
-        //         return default;
-        //     }
-        // }
- 
-        // DEPRECATED
-        // public T Load<T>()
-        // {
-        //     try
-        //     {
-        //         if (!File.Exists(Path))
-        //         {
-        //             var message = $"File {Path} does not exist";
-        //
-        //             throw new FileNotFoundException(message);
-        //             // todo: call save method on error
-        //         }
-        //
-        //         var jsonString = File.ReadAllText(Path);
-        //
-        //         return JsonConvert.DeserializeObject<T>(jsonString);
-        //     }
-        //     catch (FileNotFoundException ex)
-        //     {
-        //         var defaultSave = Save(default(T));
-        //         throw new Exception(ex.Message);
-        //         return defaultSave; // return value should be null
-        //     }
-        //     catch (JsonException ex)
-        //     {
-        //         //todo: find a way to send error message with return value of null
-        //         throw new Exception(ex.Message);
-        //     }
-        // }
-        
-        //todo: add way to manage different slots with a SaveSlot class/struct
+       //todo: add way to manage different slots with a SaveSlot class/struct
         public Dictionary<string, IFact> Load(FactDictionary factStore, SaveSlot slot)
         {
             var savePath = GetSavePath(slot);
@@ -98,7 +50,6 @@ namespace Database.Runtime
                 //factStore.SetFact(kvp.Key, fact, FactDictionary);
                 factStore.AllFacts[kvp.Key] = fact;
             }
-
             return factStore.AllFacts;
         }
 

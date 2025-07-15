@@ -5,7 +5,10 @@ namespace Foundation.Runtime
 {
     public class GameSystem : FMono
     {
-        #region Private Variables
+        #region Variables
+        // Start of the Variables region
+        #region Private
+        // Start of the Private region
         
         private static FactDictionary _gameFacts;
         private static JsonSaveSystem _jsonSaveSystem;
@@ -20,11 +23,12 @@ namespace Foundation.Runtime
         
         private static readonly string _filePath = $"{Application.persistentDataPath}/{_savePath}";
 
-        
+        // End of the Private region
         #endregion
 
-        #region Public Members
-
+        #region Public
+        // Start of the Public region
+        
         public static FactDictionary m_gameFacts
         {
             get
@@ -46,6 +50,10 @@ namespace Foundation.Runtime
             }
         }
         
+        // End of the Public region
+        #endregion
+        
+        // End of the Variables region
         #endregion
 
     }

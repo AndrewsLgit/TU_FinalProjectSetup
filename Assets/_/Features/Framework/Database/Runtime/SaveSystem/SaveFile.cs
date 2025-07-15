@@ -7,6 +7,5 @@ namespace Database.Runtime
     public class SaveFile
     {
         public Dictionary<string, SerializableFact> Facts = new();
-
     }
 }

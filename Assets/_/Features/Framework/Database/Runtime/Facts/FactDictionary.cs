@@ -40,17 +40,6 @@ namespace Database.Runtime
 
         public void SetFact<T>(string key, T value, FactPersistence persistence)
         {
-            // DOES NOT WORK
-            // if (FactExists<T>(key, out var existingFact))
-            // {
-            //     if (existingFact is Fact<T> typedFact)
-            //     {
-            //         typedFact.JsonValue = value;
-            //         typedFact.IsPersistent = persistence == FMono.FactPersistence.Persistent;
-            //     }
-            //     else throw new InvalidCastException("Fact exists but is a wrong type");
-            // }
-            // DOES NOT WORK
             
             if (_facts.TryGetValue(key, out var existingFact))
             {
@@ -86,7 +75,6 @@ namespace Database.Runtime
 
             return persistentFacts;
         }
-
 
         public void RemoveFact<T>(string key)
         {
