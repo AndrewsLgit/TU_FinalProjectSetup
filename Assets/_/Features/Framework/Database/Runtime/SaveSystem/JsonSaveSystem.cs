@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Runtime.CompilerServices;
 using Database.Runtime._.Features.Framework.Database.Runtime.Enums;
 using Database.Runtime.Interfaces;
 using Unity.Plastic.Newtonsoft.Json;
@@ -14,7 +15,7 @@ namespace Database.Runtime
 
         #region Public
 
-        public string Path { get; private set; }
+        public static string SaveDirectoryPath { get; private set; }
         
         #endregion
         
@@ -59,7 +60,7 @@ namespace Database.Runtime
             string jsonString = JsonConvert.SerializeObject(persistentFacts, Formatting.Indented);
             File.WriteAllText(path, jsonString);
             return jsonString;
-            // Info($"Game saved! \n Path: {_filePath}");
+            // Info($"Game saved! \n SaveDirectoryPath: {_filePath}");
         }
         /*
         Cherif's method: uses a SaveFile class with a SerializableFact in order to
@@ -95,11 +96,12 @@ namespace Database.Runtime
 
         private static string GetSavePath(SaveSlot slot)
         {
-            return $"{Application.persistentDataPath}/Save_{slot}.json";
+            Directory.CreateDirectory(SaveDirectoryPath);
+            return $"{SaveDirectoryPath}/Save_{slot}.json";
         }
-        public void SetPath(string path)
+        public void SetPath(string directoryPath)
         {
-            Path = path;
+            SaveDirectoryPath = directoryPath;
         }
         #endregion
     }

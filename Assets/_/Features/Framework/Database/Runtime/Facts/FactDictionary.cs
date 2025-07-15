@@ -7,22 +7,33 @@ namespace Database.Runtime
 {
     public class FactDictionary
     {
-        #region Public Members
-
+        #region Variables
+        // Start of the Variables region
+        #region Public
+        // Start of the Public region
+        public FactDictionary(string saveDirectoryPath)
+        {
+            _saveDirectoryPath = saveDirectoryPath;
+        }
         public Dictionary<string, IFact> AllFacts => _facts;
+        public string SaveDirectoryPath => _saveDirectoryPath;
         
         public enum FactPersistence
         {
             Normal,
             Persistent,
         }
-        
+        // End of the Public region
         #endregion
         
-        #region Private Variables
-        
+        #region Private
+        // Start of the Private region
         private Dictionary<string, IFact> _facts = new Dictionary<string, IFact>();
+        private string _saveDirectoryPath;
         
+        // End of the Private region
+        #endregion
+        // End of the Variables region
         #endregion
         
         #region Main Methods
