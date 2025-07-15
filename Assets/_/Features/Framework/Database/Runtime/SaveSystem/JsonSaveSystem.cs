@@ -88,11 +88,11 @@ namespace Database.Runtime
             {
                 // get type from type string
                 var type = Type.GetType(kvp.Value.ValueType);
-                // deserialize value from json string
+                // deserialize value from json string with proper value type
                 var value = JsonConvert.DeserializeObject(kvp.Value.JsonValue, type);
-                // create fact with proper type
+                // create generic Fact with proper type
                 var factType = typeof(Fact<>).MakeGenericType(type);
-                // create fact instance with deserialized value
+                // create Fact instance with deserialized value
                 var fact = (IFact)Activator.CreateInstance(factType, value, kvp.Value.IsPersistent);
                 
                 //factStore.SetFact(kvp.Key, fact, FactDictionary);
