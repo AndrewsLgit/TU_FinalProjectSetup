@@ -7,8 +7,7 @@ namespace Database.Runtime
     public class SerializableFact
     {
         // stock values as strings from our Json file
-        [JsonProperty( PropertyName = "Value")]
-        public string JsonValue;
+        public string Value;
         public string ValueType;
         public bool IsPersistent;
 
